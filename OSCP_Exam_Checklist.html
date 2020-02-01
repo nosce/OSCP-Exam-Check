@@ -1,0 +1,912 @@
+<html>
+<head>
+    <title>OSCP Exam Guide Checklist</title>
+    <style>
+        /* Text */
+        body {
+            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+            padding: 2em 4em;
+            width: 800px;
+            margin: 0 auto;
+            line-height: 1.2;
+        }
+        code {
+            font-family: 'Ubuntu Monospace', monospace;
+            color: white;
+            background-color: #3a3a3a;
+            padding: 0.1em 0.2em;
+        }
+        a {
+            color: #92b3c5;
+            text-decoration: none;
+        }
+        a::before {
+            content: "[";
+            display: inline;
+            padding-right: 0.2em;
+        }
+        a::after {
+            content: "]";
+            padding-left: 0.2em;
+        }
+        /* Head*/
+        .osid_input {
+            text-align: center;
+            border-top: 2px dashed #dbdbdb;
+            border-bottom: 2px dashed #dbdbdb;
+        }
+        .osid_input p:first-child {
+            font-weight: 300;
+        }
+        .osid_input p:last-child {
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+        /* Text input */
+        input[type="text"] {
+            border: none;
+            background-color: whitesmoke;
+            font-size: 1.2em;
+            padding: 0.1em;
+            font-family: 'Ubuntu Monospace', monospace;
+        }
+        input[type="text"].invalid {
+            background-color: #eacad2;
+        }
+        input[type="text"].valid {
+            background-color: #edf3d8;
+        }
+        input#osid {
+            width: 4em;
+        }
+        input#ip {
+            font-size: 2em;
+            width: 100%;
+            margin: 0.5em 0;
+        }
+        input.md5_field {
+            width: 20em;
+        }
+        /* Sections */
+        header {
+            margin: 0 auto 1em;
+            text-align: center;
+        }
+        section h1 {
+            font-weight: 300;
+            font-size: 2.5em;
+            margin: 1em 0 0 -1.05em;
+        }
+        section h1::before {
+            content: '+';
+            display: inline-block;
+            width: 1em;
+            height: 1em;          
+        }
+        section.open h1::before {
+            content: '–';
+        }
+        section.done h1 {
+            color: #d2e29e;
+        }
+        section.todo h1 {
+            color: #bb506b;
+        }
+        section summary {
+            font-size: smaller;
+            font-weight: 300;
+            color: gray;
+        }
+        section .checklist {
+            display: none;
+        }
+        section.open .checklist {
+            display: block;
+        }
+        /* Checklist */
+        .checkitem {
+            display: block;
+            margin: 1em 0;
+        }
+        input[type="checkbox"] + label ul {
+            padding: 0;
+            list-style: square;
+            line-height: 2;
+            margin: 0.5em 2.7em;
+            font-weight: 300;
+        }
+        input[type="checkbox"] {
+            display:none;
+        }
+        input[type="checkbox"] + label::before {
+            width: 0.8em;
+            height: 0.8em;
+            border-radius: 0.2em;
+            border: 0.15em solid #bb506b;
+            background-color: #eacad2;
+            display: block;
+            content: "";
+            float: left;
+            margin-left: -2.5em;
+        }
+        table input[type="checkbox"] + label::before {
+            margin: 0;
+        }
+        input[type="checkbox"]:checked + label::before {
+            border-color: #d2e29e;
+            box-shadow: inset 0 0 0 0.2em #fff;
+            background-color: #d2e29e;
+        }
+        input[type="checkbox"] + label > * {
+            display: block;
+            margin: 1em 0 1em 1.7em;
+        }
+        input[type="checkbox"] + label > i {
+            display: inline;
+            margin: 0;
+        }
+        /* Table */
+        .machine_list input.ip_field {
+            width: 10em;
+        }
+        .machine_list {
+            border-collapse: collapse;
+            margin: 0 !important;
+        }
+        .machine_list th {
+            text-align: center;
+            color: grey;
+        }
+        .machine_list td:first-child {
+            font-weight: 300;
+            font-size: 1.5em;
+            color: silver;
+            padding: 0.5em;
+            border-right: 1px dotted #dbdbdb;
+        }
+        .machine_list td:nth-child(2) {
+            font-weight: 300;
+            text-align: center;
+        }
+        .machine_list td:last-child label::before {
+            margin: 0 auto;
+            float: none;
+        }
+        .machine_list tr:nth-child(3n+1) {
+            border-bottom: 0.5em solid #dbdbdb;
+            font-size: 0.85em;
+            text-align: right;
+        }
+        .machine_list tr:nth-child(3n) {
+            font-size: 0.85em;
+            text-align: right;
+        }
+        .machine_list tr:nth-child(3n) td,
+        .machine_list tr:nth-child(3n+1) td {
+            padding-bottom: 0.5em;
+        }
+        /* Buttons */
+        button {
+            border: none;
+            border-radius: 0.2em;
+            padding: 0.5em;
+            width: 8em;            
+            background-color: #d5e2e9;            
+            font-family: 'Ubuntu', sans-serif;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: #d2e29e;            
+        }
+        #savefile {
+            font-size: 1.5em;
+            margin: 1em auto;
+        }
+        #savesettings, #clearall {
+            font-size: 0.8em;
+            margin: 0 0.5em 1em;
+        }
+
+    </style>
+</head>
+<!-----------------------------------------------------------------------------------
+   CONTENT START
+------------------------------------------------------------------------------------>  
+<body>
+    <header>
+        <button id="savesettings">Save Checklist</button> 
+        <button id="clearall">Clear All</button>
+        <br/>
+        <small>
+            <a href="https://support.offensive-security.com/oscp-exam-guide/" target=_blank>
+                Official Offensive Security Exam Guide
+            </a>
+        </small>
+    </header>
+    <section>
+        <div class="osid_input">
+            <p>My OSID</p>
+            <p>0S-<input type="text" id="osid" name="osid"/></p>
+        </div>
+    </section>
+    <!-----------------------------------------------------------------------------------
+    PREPARATION
+    ------------------------------------------------------------------------------------>   
+    <section>
+        <h1>Preparation</h1>
+        <summary>Complete these steps 30 minutes before your exam starts</summary>
+        <div class="checklist">
+            <div class="checkitem">
+                <input type="checkbox" id="id" name="id"/>
+                <label for="id">
+                    Have your ID card ready
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="phone" name="phone"/>
+                <label for="phone">
+                    Turn off your phone
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="apps" name="apps"/>
+                <label for="apps">
+                    Start required applications
+                    <ul>
+                        <li>Kali Linux</li>
+                        <li>Separate browser window for proctoring</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="kali" name="kali"/>
+                <label for="kali">
+                    Ensure your Kali is connected to the internet
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="firewall" name="firewall"/>
+                <label for="firewall">
+                    Allow connections from the exam machines through your firewall (if you have any)
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="screen_set" name="screen_set"/>
+                <label for="screen_set">
+                    Check your screen recording settings
+                    <ul>
+                        <li>Screencast runs on host <small>(to avoid problems when resizing the Kali window)</small></li>
+                        <li>Low framerate (1 fps)</li>
+                        <li>Automatic saving</li>                        
+                    </ul>
+                </label>
+            </div>
+        </div>
+    </section>
+    <!-----------------------------------------------------------------------------------
+    START STEPS
+    ------------------------------------------------------------------------------------> 
+    <section>
+        <h1>Start</h1>
+        <summary>Complete these steps 15 minutes before your exam starts</summary>
+        <div class="checklist">
+            <div class="checkitem">
+                <input type="checkbox" id="camera" name="camera"/>
+                <label for="camera">
+                    Connect or uncover your camera
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="proctor" name="proctor"/>
+                <label for="proctor">
+                    Log into the proctoring session
+                    <a href="https://proctoring.offensive-security.com/student/login" target=_blank>Offensive Security Proctoring Login</a>
+                    <div>
+                        OSID: <code id="login_osid">OS-XXXXX</code>
+                    </div>
+                    <div>
+                        <label for="md5">MD5: </label>
+                        <input type="text" id="md5" name="md5" class="md5_field"/>
+                    </div>                    
+                </label>
+            </div>
+        </div>
+    </section>
+    <!-----------------------------------------------------------------------------------
+    VPN CONNECTION
+    ------------------------------------------------------------------------------------> 
+    <section>
+        <h1>VPN Connection</h1>
+        <summary>Complete these steps once your exam starts</summary>
+        <div class="checklist">
+            <div class="checkitem">
+                <input type="checkbox" id="download" name="download"/>
+                <label for="download">
+                    Download the exam-connection.tar.bz2 file from the link provided in the exam email to your Kali machine
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="extract" name="extract"/>
+                <label for="extract">
+                    Extract the file
+                    <code>tar xvfj exam-connection.tar.bz2</code>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="connect_vpn" name="connect_vpn"/>
+                <label for="connect_vpn">
+                    Initiate a connection to the exam lab with OpenVPN
+                    <code id="openvpn">openvpn OS-XXXXX-OSCP.ovpn</code>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="login" name="login"/>
+                <label for="login">
+                    Enter the username and password provided in the exam email to authenticate to the VPN
+                </label>
+            </div>
+        </div>
+    </section>
+    <!-----------------------------------------------------------------------------------
+    EXAM START
+    ------------------------------------------------------------------------------------> 
+    <section>
+        <h1>Starting the Exam</h1>
+        <summary>Complete these steps once the exam starts and update them during the exam</summary>
+        <div class="checklist">
+            <div class="checkitem">
+                <input type="checkbox" id="screencast" name="screencast"/>
+                <label for="screencast">
+                    Start recording the screen
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="check_ip" name="check_ip"/>
+                <label for="check_ip">
+                    Write down your IP
+                    <input type="text" id="ip" name="ip" class="ip_field"/>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="machines" name="machines"/>
+                <label for="machines">
+                    Check the target machines and which flags are required for which machine
+                    <div>
+                        <label for="bo_dev">Buffer overflow development: </label>
+                        <input type="text" id="bo_dev" name="bo_dev" class="ip_field"/>
+                    </div>
+                    <table class="machine_list">
+                        <tr>
+                            <th>#</th>
+                            <th>Points</th>
+                            <th>IP</th>
+                            <th>Flag</th>
+                            <th>Screen-<br/>shot</th>
+                        </tr>
+                        <!-- First machine -->
+                        <tr>
+                            <td>1</td>
+                            <td>10</td>
+                            <td><input type="text" id="target_1" name="target_1" class="ip_field"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>user.txt</td>
+                            <td><input type="text" id="user_1" name="user_1" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="user_1_screen" name="user_1_screen"/>
+                                <label for="user_1_screen"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>proof.txt</td>
+                            <td><input type="text" id="proof_1" name="proof_1" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="proof_1_screen" name="proof_1_screen"/>
+                                <label for="proof_1_screen"></label>
+                            </td>
+                        </tr>
+                        <!-- Second machine -->
+                        <tr>
+                            <td>2</td>
+                            <td>20</td>
+                            <td><input type="text" id="target_2" name="target_2" class="ip_field"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>user.txt</td>
+                            <td><input type="text" id="user_2" name="user_2" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="user_2_screen" name="user_2_screen"/>
+                                <label for="user_2_screen"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>proof.txt</td>
+                            <td><input type="text" id="proof_2" name="proof_2" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="proof_2_screen" name="proof_2_screen"/>
+                                <label for="proof_2_screen"></label>
+                            </td>
+                        </tr>
+                        <!-- Third machine -->
+                        <tr>
+                            <td>3</td>
+                            <td>20</td>
+                            <td><input type="text" id="target_3" name="target_3" class="ip_field"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>user.txt</td>
+                            <td><input type="text" id="user_3" name="user_3" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="user_3_screen" name="user_3_screen"/>
+                                <label for="user_3_screen"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>proof.txt</td>
+                            <td><input type="text" id="proof_3" name="proof_3" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="proof_3_screen" name="proof_3_screen"/>
+                                <label for="proof_3_screen"></label>
+                            </td>
+                        </tr>
+                        <!-- Fourth machine -->
+                        <tr>
+                            <td>4</td>
+                            <td>25</td>
+                            <td><input type="text" id="target_4" name="target_4" class="ip_field"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>user.txt</td>
+                            <td><input type="text" id="user_4" name="user_4" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="user_4_screen" name="user_4_screen"/>
+                                <label for="user_4_screen"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>proof.txt</td>
+                            <td><input type="text" id="proof_4" name="proof_4" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="proof_4_screen" name="proof_4_screen"/>
+                                <label for="proof_4_screen"></label>
+                            </td>
+                        </tr>
+                        <!-- Fifth machine -->
+                        <tr>
+                            <td>5</td>
+                            <td>25</td>
+                            <td><input type="text" id="target_5" name="target_5" class="ip_field"/></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>user.txt</td>
+                            <td><input type="text" id="user_5" name="user_5" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="user_5_screen" name="user_5_screen"/>
+                                <label for="user_5_screen"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>proof.txt</td>
+                            <td><input type="text" id="proof_5" name="proof_5" class="md5_field"/></td>
+                            <td>
+                                <input type="checkbox" id="proof_5_screen" name="proof_5_screen"/>
+                                <label for="proof_5_screen"></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <button id="savefile">Save List to File</button>                
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="rdp" name="rdp"/>
+                <label for="rdp">
+                    Connect to buffer overflow development machine
+                    <code id="rdp_command">rdesktop -g 85% -r disk:share=/opt/winshare -r clipboard:CLIPBOARD -u admin -p lab 192.168.X.X</code>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="save_screencast" name="save_screencast"/>
+                <label for="save_screencast">
+                    Save and restart your screencast after compromising a machine
+                </label>
+            </div>
+        </div>        
+    </section>
+    <!-----------------------------------------------------------------------------------
+    EXAM FINISH
+    ------------------------------------------------------------------------------------> 
+    <section>
+        <h1>Finishing the Exam</h1>
+        <summary>Complete these steps when your exam time is up or you want to finish the exam</summary>
+        <div class="checklist">
+            <div class="checkitem">
+                <input type="checkbox" id="screen_stop" name="screen_stop"/>
+                <label for="screen_stop">
+                    Stop recording your screen
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="screenshot_check" name="screenshot_check"/>
+                <label for="screenshot_check">
+                    Check if you have all required screenshots
+                    <ul>
+                        <li>Flags</li>
+                        <li>Attack path</li>
+                        <li>Buffer overflow steps</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="save_flags" name="save_flags"/>
+                <label for="save_flags">
+                    Click <i>Save List to File</i> or <i>Save Checklist</i> to save the flags entered above for the report
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="procotor_inform" name="procotor_inform"/>
+                <label for="procotor_inform">
+                    Inform the proctor that you wish to end the exam
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="end_button" name="end_button"/>
+                <label for="end_button">
+                    Click the <i>End Exam</i> button in the proctoring tool
+                </label>
+            </div>
+        </div>
+    </section>
+    <!-----------------------------------------------------------------------------------
+    REPORTING
+    ------------------------------------------------------------------------------------> 
+    <section>
+        <h1>Reporting</h1>
+        <summary>Complete these steps within 24 hours after finishing the exam</summary>
+        <div class="checklist">
+            <div class="checkitem">
+                <input type="checkbox" id="report_steps" name="report_steps"/>
+                <label for="report_steps">
+                    Your report contains step-by-step descriptions of your attacks with:
+                    <ul>
+                        <li>Commands issued</li>
+                        <li>Console output</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="report_code" name="report_code"/>
+                <label for="report_code">
+                    For unmodified exploit code, your report contains a link to the exploit code
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="report_code_modified" name="report_code_modified"/>
+                <label for="report_code_modified">
+                    For modified exploit code, your report contains:
+                    <ul>
+                        <li>The modified exploit code</li>
+                        <li>The URL to the original exploit code</li>
+                        <li>Highlighted changes you have made</li>
+                        <li>An explanation of why those changes were made</li>
+                        <li>The command used to generate any shellcode (if applicable)</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="bo_steps" name="bo_steps"/>
+                <label for="bo_steps">
+                    For the buffer overflow, your report contains:
+                    <ul>
+                        <li>A step-by-step description of the buffer overflow development</li>
+                        <li>Screenshots of the registers/stack in the debugger after each step</li>
+                        <li>The complete buffer overflow code</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="pdf_format" name="pdf_format"/>
+                <label for="pdf_format">
+                    Save your reports in PDF format
+                    <ul>
+                        <li id="exam_report_name">OSCP-OS-XXXXX-Exam-Report.pdf</li>
+                        <li id="lab_report_name">OSCP-OS-XXXXX-Lab-Report.pdf</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="create_archive" name="create_archive"/>
+                <label for="create_archive">
+                    Archive your PDFs into a password-protected .7z file using your OSID as password and part of the name
+                    <code id="report_archive">7z a OSCP-OS-XXXXX-Reports.7z -pOS-XXXXX OSCP-OS-*.pdf</code>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="upload_archive" name="upload_archive"/>
+                <label for="upload_archive">
+                    Upload your .7z file
+                    <a href="https://upload.offsec.com/" target=_blank>Offensive Security Upload Link</a>
+                </label>
+            </div>
+            <div class="checkitem">
+                <input type="checkbox" id="mail_link" name="mail_link"/>
+                <label for="mail_link">
+                    Email the link from the upload page to
+                    <a id="report_mail" href="mailto:oscp@offensive-security.com">Email at Offensive Security</a>
+                </label>
+            </div>
+        </div>
+    </section>
+</body>
+<!-----------------------------------------------------------------------------------
+   CONTENT END
+------------------------------------------------------------------------------------> 
+<script>
+    /**
+     * Creates a text file which is downloaded to the browser's download directory.
+     * @param {string} data         Text to write in file
+     * @param {string} fileName     File name of downloaded file
+     */
+    function saveData(data, fileName) {        
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+
+        var json = JSON.stringify(data),
+            blob = new Blob([data], {type: "text/plain;charset=utf-8"}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+    /**
+     * Fetches the data from the target machine table and saves it in a text file.
+     */
+    function saveFile(e) {
+        var own_ip = "My IP: " + document.querySelector("#ip").value;
+        var machine_1 = "\n\nMachine " + document.querySelector("#target_1").value + 
+                        "\n - user.txt: " + document.querySelector("#user_1").value + 
+                        "\n - proof.txt: " + document.querySelector("#proof_1").value;
+        var machine_2 = "\n\nMachine " + document.querySelector("#target_2").value + 
+                        "\n - user.txt: " + document.querySelector("#user_2").value + 
+                        "\n - proof.txt: " + document.querySelector("#proof_2").value;
+        var machine_3 = "\n\nMachine " + document.querySelector("#target_3").value + 
+                        "\n - user.txt: " + document.querySelector("#user_3").value + 
+                        "\n - proof.txt: " + document.querySelector("#proof_3").value;
+        var machine_4 = "\n\nMachine " + document.querySelector("#target_4").value + 
+                        "\n - user.txt: " + document.querySelector("#user_4").value + 
+                        "\n - proof.txt: " + document.querySelector("#proof_4").value;
+        var machine_5 = "\n\nMachine " + document.querySelector("#target_5").value + 
+                        "\n - user.txt: " + document.querySelector("#user_5").value + 
+                        "\n - proof.txt: " + document.querySelector("#proof_5").value;
+        var output = own_ip + machine_1 + machine_2 + machine_3 + machine_4 + machine_5;
+        saveData(output, "OSCP_Exam_Machines.txt");            
+        e.preventDefault()
+    }
+    /**
+     * Fetches the IP address of the BO dev machine and updates rdesktop command accordingly.
+     * @param {string} ip         IP address of BO development machine
+     */
+    function updateRDPCommand(ip) {
+        if (ip == null) {
+            return;
+        }
+        if (checkIP(ip) != null) {
+            var command = "rdesktop -g 85% -r disk:share=/opt/winshare -r clipboard:CLIPBOARD -u admin -p lab " + ip ;
+            document.querySelector("#rdp_command").innerText = command;
+        }
+    }
+    /**
+     * Fetches the entered OSID number and updates multiple commands accordingly.
+     * @param {string} input        OSID number
+     */
+    function updateOSID(input) {
+        document.querySelector("#login_osid").innerText = "OS-" + input;
+        document.querySelector("#openvpn").innerText = "openvpn OS-" + input + "-OSCP.ovpn";
+        document.querySelector("#exam_report_name").innerText = "OSCP-OS-"  + input + "-Exam-Report.pdf";
+        document.querySelector("#lab_report_name").innerText = "OSCP-OS-"  + input + "-Lab-Report.pdf";
+        document.querySelector("#report_archive").innerText = "7z a OSCP-OS-" + input + "-pOS-" + input + " OSCP-OS-*.pdf";
+        mailtext = "mailto:oscp@offensive-security.com?subject=Exam Report%20OS-" + input + 
+                   "&body=Dear%20Offensive%20Security%20Team%2C%0D%0A%0D%0AI%20have%20uploaded%20my%20reports.%20" +
+                   "The%20archive%20is%20available%20at%20the%20following%20link%3A%0D%0A%0D%0A" + 
+                   "Best%20regards%0D%0A%0D%0AOS-" + input;
+        document.querySelector("#report_mail").setAttribute('href', mailtext)
+    }
+    /**
+     * Checks if a given string is a valid IP address.
+     * @param {string} ip   IP address
+     * @return {bool}       True if valid IP address
+     */
+    function checkIP(ip) {
+        var re = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+        return ip.match(re)
+    }
+    /**
+     * Checks if a given string is a valid MD5 hash.
+     * @param {string} input    String to test
+     * @return {bool}           True if valid MD5 hash
+     */
+    function checkMD5(input) {
+        var re = /^[a-f0-9]{32}$/igm;
+        return input.match(re);
+    }
+    /**
+     * Checks if all items of a checklist are checked and marks the section title accordingly.
+     * @param {checkitem} target      Checkitem that was clicked
+     */
+    function getCheckState(target) {
+        var checklist = target.closest(".checklist");
+        var section = target.closest("section");
+        var checkitems = checklist.querySelectorAll("input[type='checkbox']");
+        for (var item of checkitems) {
+            if (item.checked == false) {
+                section.classList.add('todo');
+                section.classList.remove('done');
+                break;
+            }            
+            section.classList.add('done');
+            section.classList.remove('todo');
+        }
+    }
+    /**
+     * Checks which input field was updated and handles the changes made.
+     * @param {event} e      Keyup event in the document body
+     */
+    function checkInput(e) {
+        var target = e.target;
+
+        // Update OSID in document
+        if (target.id == "osid") {
+            updateOSID(target.value)
+        }
+
+        // Check IP fields
+        if (target.classList.contains('ip_field')) {
+            if (target.value == "") {
+                target.classList.remove('valid');
+                target.classList.remove('invalid');
+            } else {
+                valid = checkIP(target.value);
+                if (valid) {
+                    target.classList.add('valid');
+                    target.classList.remove('invalid');
+                } else {
+                    target.classList.add('invalid');
+                    target.classList.remove('valid');
+                }
+            }
+        }
+
+        // Update buffer overflow address
+        if (target.id == "bo_dev") {
+            updateRDPCommand(target.value)
+        }
+
+        // Check md5 fields
+        if (target.classList.contains('md5_field')) {
+            if (target.value == "") {
+                target.classList.remove('valid');
+                target.classList.remove('invalid');
+            } else {
+                valid = checkMD5(target.value);
+                if (valid) {
+                    target.classList.add('valid');
+                    target.classList.remove('invalid');
+                } else {
+                    target.classList.add('invalid');
+                    target.classList.remove('valid');
+                }
+            }
+        }
+    }
+    /**
+     * Checks which element was clicked and calls further functions accordingly.
+     * @param {event} e      Click event in the document body
+     */
+    function handleClick(e) {
+        var target = e.target;        
+        // Toggle sections
+        if (target.tagName == "H1") {
+            target.parentElement.classList.toggle("open");
+        }
+        // Save file
+        if (target.id == "savefile") {
+            saveFile();
+        }
+        // Check checklists
+        if (target.type == "checkbox") {
+            getCheckState(target);
+        }
+        // Save settings
+        if (target.id == "savesettings") {
+            storeSettings();
+        }
+        // Clear storage
+        if (target.id == "clearall") {
+            clearSettings();
+        }
+    }
+    /**
+     * Writes the current status of all input fields to the local storage.
+     */
+    function storeSettings() {
+        var checkitems = document.querySelectorAll("input[type='checkbox']");
+        for (item of checkitems) {
+            localStorage.setItem(item.id, item.checked);           
+        }
+        var inputitems = document.querySelectorAll("input[type='text']");
+        for (item of inputitems) {
+            localStorage.setItem(item.id, item.value);         
+        }
+    }
+    /**
+     * Loads the last stored status of all input fields from the local storage.
+     */
+    function restoreSettings() {
+        var checkitems = document.querySelectorAll("input[type='checkbox']");
+        for (item of checkitems) {         
+            item.checked = false;
+            if (localStorage.getItem(item.id) == "true") {
+                item.checked = true;
+            }
+        }
+        var inputitems = document.querySelectorAll("input[type='text']");
+        for (item of inputitems) {
+            item.value = localStorage.getItem(item.id);
+        }
+        updateOSID(localStorage.getItem('osid'));
+        updateRDPCommand(localStorage.getItem('bo_dev'))
+    }
+    /**
+     * Clears all saved settings from the local storage.
+     */
+    function clearSettings() {
+        localStorage.clear();
+        restoreSettings();
+    }
+    /**
+     * Sets up settings and event listeners.
+     */
+    function main() {
+        // Get last settings
+        restoreSettings();
+        // Handle events
+        var parent = document.querySelector("body");
+        parent.addEventListener("keyup", checkInput, false);
+        parent.addEventListener("click", handleClick, false);
+    }
+
+    window.onload = main
+</script>
+</html>
