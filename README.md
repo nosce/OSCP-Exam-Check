@@ -26,7 +26,7 @@ Follow the checklist when starting your exam. Mark all steps you have finished. 
 
 You can store your current input at any time by clicking *Save Checklist*. To remove all input, click *Clear All*.
 
-![image](https://user-images.githubusercontent.com/27899698/73594785-cfb92780-4511-11ea-8270-46387a286cfe.png)
+![Screenshot](https://user-images.githubusercontent.com/27899698/73594785-cfb92780-4511-11ea-8270-46387a286cfe.png =500x)
 
 # How can I add entries?
 To add your own checklist entries, just edit the HTML file. Checklist items have the following structure:
