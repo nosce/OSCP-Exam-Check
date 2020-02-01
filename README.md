@@ -2,11 +2,11 @@
 A simple HTML-based checklist for the most important steps required during the OSCP exam
 
 # What is it for?
-When I prepared for my OSCP exam, I read the OSCP Certification Exam Guide a thousand times, marked the most important aspects, created a digital and analog checklist version etc. In short, I thought I was well prepared and knew what to do.
+When I prepared for my OSCP exam, I read the OSCP Certification Exam Guide a thousand times, marked the most important aspects, created a digital and analog checklist version etc. In short, I thought I was well prepared with regard to the formal steps and knew what to do.
 
-Then during the exam I got quite confused with my multiple checklists. Lack of sleep wasn't helpful either... In the end, I absolutly lost track and forgot some important steps.
+Then during the exam I got quite confused with my multiple checklists. Lack of sleep wasn't helpful either... In the end, I absolutly lost track and forgot some important formal steps.
 
-So I decided to merge all my notes to just one clearly structured checklistwhich helps me keep track and shows me if I forgot something. Maybe the checklist will halp other OSCP candidates as well, so here you go :)
+So I decided to merge all my notes to just one clearly structured checklist which helps me keep track and shows me if I forgot something. After all, how wants to fail the exam just because of missing screenshots, wrong report format or other formalities. Maybe the checklist will help other OSCP students as well, so you can focus on hacking instead of the formal stuff.
 
 :warning:
 **Please note that the checklist is based in the OSCP Certification Exam Guide as of January, 2020. I will not keep track of changes made to the Exam Guide later. Feel free to update the checklist yourself and customize it according to your needs.**
