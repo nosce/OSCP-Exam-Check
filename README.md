@@ -26,6 +26,8 @@ Follow the checklist when starting your exam. Mark all steps you have finished. 
 
 You can store your current input at any time by clicking *Save Checklist*. To remove all input, click *Clear All*.
 
+![image](https://user-images.githubusercontent.com/27899698/73594785-cfb92780-4511-11ea-8270-46387a286cfe.png)
+
 # How can I add entries?
 To add your own checklist entries, just edit the HTML file. Checklist items have the following structure:
 
@@ -50,7 +52,7 @@ To add your own checklist entries, just edit the HTML file. Checklist items have
 </div>
 ```
 
-## Checlist item with list
+## Checklist item with list
 ```html
 <div class="checkitem">
   <input type="checkbox" id="apps" name="apps"/>
