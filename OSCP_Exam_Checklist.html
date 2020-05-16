@@ -271,17 +271,6 @@
                     Allow connections from the exam machines through your firewall (if you have any)
                 </label>
             </div>
-            <div class="checkitem">
-                <input type="checkbox" id="screen_set" name="screen_set"/>
-                <label for="screen_set">
-                    Check your screen recording settings
-                    <ul>
-                        <li>Screencast runs on host <small>(to avoid problems when resizing the Kali window)</small></li>
-                        <li>Low framerate (1 fps)</li>
-                        <li>Automatic saving</li>                        
-                    </ul>
-                </label>
-            </div>
         </div>
     </section>
     <!-----------------------------------------------------------------------------------
@@ -355,12 +344,6 @@
         <h1>Starting the Exam</h1>
         <summary>Complete these steps once the exam starts and update them during the exam</summary>
         <div class="checklist">
-            <div class="checkitem">
-                <input type="checkbox" id="screencast" name="screencast"/>
-                <label for="screencast">
-                    Start recording the screen
-                </label>
-            </div>
             <div class="checkitem">
                 <input type="checkbox" id="check_ip" name="check_ip"/>
                 <label for="check_ip">
@@ -723,7 +706,7 @@
             return;
         }
         if (checkIP(ip) != null) {
-            var command = "rdesktop -g 85% -r disk:share=/opt/winshare -r clipboard:CLIPBOARD -u admin -p lab " + ip ;
+            var command = "rdesktop -g 85% -r disk:share=/opt/winshare -r clipboard:CLIPBOARD -u admin -p password " + ip ;
             document.querySelector("#rdp_command").innerText = command;
         }
     }
@@ -736,7 +719,7 @@
         document.querySelector("#openvpn").innerText = "openvpn OS-" + input + "-OSCP.ovpn";
         document.querySelector("#exam_report_name").innerText = "OSCP-OS-"  + input + "-Exam-Report.pdf";
         document.querySelector("#lab_report_name").innerText = "OSCP-OS-"  + input + "-Lab-Report.pdf";
-        document.querySelector("#report_archive").innerText = "7z a OSCP-OS-" + input + "-pOS-" + input + " OSCP-OS-*.pdf";
+        document.querySelector("#report_archive").innerText = "7z a OSCP-OS-" + input + "-Reports.7z -pOS-" + input + " OSCP-OS-*.pdf";
         mailtext = "mailto:oscp@offensive-security.com?subject=Exam Report%20OS-" + input + 
                    "&body=Dear%20Offensive%20Security%20Team%2C%0D%0A%0D%0AI%20have%20uploaded%20my%20reports.%20" +
                    "The%20archive%20is%20available%20at%20the%20following%20link%3A%0D%0A%0D%0A" + 
